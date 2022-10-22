@@ -1,0 +1,15 @@
+body{
+    background-color: midnightblue;
+    color: silver;
+    text-align: center;
+}
+
+table{
+    border: 2px solid silver;
+    color: silver;
+    margin: auto;
+}
+
+td{
+    padding: 2px 7px;
+}

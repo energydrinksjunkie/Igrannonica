@@ -1,0 +1,13 @@
+<div class="card" style="width: 18rem;" *ngFor = "let item of  cardList$|async">
+
+  <img class="card-img-top" src="https://www.wafdbank.com/static/f8df9525c2626f0dcacb07cb9f7b2fb1/cad35/wafd-bank-contactless-debit.png" alt="Card image cap">
+
+    <div class="card-body">
+      <h5 class="card-title">{{item.holderName}} {{item.holderLastName}}</h5>
+      <p class="card-text">{{item.cardNumber}}</p>
+      <p class="card-text">{{item.balance}} dinara</p>
+      <a href="/" class="btn btn-primary" (click)="onClickDel(item.id)">Izbaci karticu</a>
+
+
+  </div>
+</div>

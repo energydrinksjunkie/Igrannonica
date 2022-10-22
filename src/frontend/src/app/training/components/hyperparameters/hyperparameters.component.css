@@ -1,0 +1,89 @@
+.options {
+    margin: auto;
+    margin-top: 100px;
+    padding: 10px;
+    height: auto;
+    width: 80%;
+    text-align: center;
+}
+
+.numberSpinner {
+    width: 300px;
+}
+
+#miniCircle {
+    position: relative;
+    left: 20%;
+    top: -20px;
+    transform: translate(-50%,-50%);
+	width: 35px;
+    height: 35px; 
+    margin-left: 50px;
+}
+
+.miniLoader {
+    width: calc(100% - 0px);
+    height: calc(100% - 0px);
+    border: 8px solid transparent;
+    border-top: 8px solid #09f;
+    border-radius: 50%;
+    animation: rotate 1.5s linear infinite;
+}
+#circle {
+    position: relative;
+    top: -30em;
+    /* left: 30px; */
+    margin: 0 auto;
+    /* transform: translate(-50%,-50%); */
+	width: 150px;
+    height: 150px;	
+}
+.loader {
+    width: calc(100% - 0px);
+	height: calc(100% - 0px);
+	border: 8px solid transparent;
+	border-top: 8px solid #09f;
+	border-radius: 50%;
+	animation: rotate 3s linear infinite;
+}
+
+h4 {
+    text-align: center;
+}
+
+.mat-form {
+    transform: scale(0.8);
+}
+
+#button {
+    text-align: center;
+}
+
+.btn-circle.btn-sm {
+    width: 80px;
+    height: 80px;
+    padding: 12px 0px;
+    border-radius: 40px;
+    text-align: center;
+}
+
+#divChart {
+    display: block;
+    width: 400px;
+    height: 400px;
+}
+
+.metricButtons{
+    background-color: #673ab7!important;
+    color: white;
+    padding: 0px;
+}
+.metricsSelect:not(.btn-primary):hover{
+    color: #314dbf;
+    font-weight: bold;
+}
+
+.metricsSelect:not(.btn-primary):focus{
+    color: #314dbf;
+    font-weight: bold;
+}

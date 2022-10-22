@@ -1,0 +1,115 @@
+<div id="circle" [ngStyle]="{'display': loaderDisplay}">
+    <div class="loader">
+        <div class="loader">
+            <div class="loader">
+                <div class="loader">
+                    <div class="loader">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center fw-bold mt-2">Loading data...</div>
+</div>
+
+<div class="row justify-content-center d-flex align-items-center" style="margin-top: 10px;color: gray;" *ngIf="stepperDisplay != 'none'">Use stepper below to navigate between steps</div>
+
+<mat-stepper [linear]="linearStepper" [selectedIndex]="viewIndicator" (selectionChange)="setIndex($event)" #stepper [ngStyle]="{'display': stepperDisplay}">
+    <mat-step [completed]="uploadCompleted">
+        <ng-template matStepLabel>Dataset selection</ng-template>
+        <div>
+            <app-upload #upload [badLinkErrorDisplay]="errorDisplay" [myDatasets]="myDatasets" (myDatasetEvent)="chooseMyDataset($event)" [errorMessage]="errorMessage" (linkEvent)="onShowDataClick($event)" (uploadEvent)="onFileSelected($event)"></app-upload>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Column selection and data preparation</ng-template>
+        <div id="first">
+            <div class="row justify-content-center" style="margin-top: 0.3rem;">
+                <div class="col-sm-4 ms-5">
+                    <h2>Selected dataset: <i>{{datasetName}}</i></h2>
+                </div>
+                <div class="col-sm ms-5">
+                    <button type="button" class="btn btn-secondary" *ngIf="showColumnSelectionPage" (click)="toggleTables()" id="statsButton">Show stats</button>&nbsp;
+                    <button type="button" class="btn btn-secondary" *ngIf="!showColumnSelectionPage" (click)="toggleTables()" id="statsButton">Show table</button>&nbsp;
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifyModal" (click)="modalOpen()">
+                    Modify dataset
+                    </button>&nbsp;
+                    <button type="button" class="btn btn-warning" (click)="downloadFile()">Download</button>
+                    <!--<button id="nextButton" type="button" class="btn btn-primary float-end me-5" [disabled]="nextButtonDisable" (click)="OnNextClick()">Next</button>-->
+                </div>
+            </div>
+            <div class="row mx-auto" id="mainContainer" [ngStyle]="{'display': mainContainerDisplay}">
+                <div class="col-lg" [formGroup]="formPages">
+                    <app-show-table #dataTable id="mainTable" (hideEvent)="changeCheckBox($event)">
+                    </app-show-table><br>
+                    <div class="justify-content-sm-end d-flex align-items-center me-1">
+                        Jump to page&nbsp;<input matInput type="number" formControlName="currentPage" [min]="minPages" [max]="maxPages" (ngModelChange)="changePage($event)" (keydown.enter)="changePage($event)">
+                    </div>
+                </div>
+                <div class="col-lg-4" style="padding:0em 0.3em;">
+                    <app-labels #columnsSelecion id="labelCards" [missing]="numOfMissingValues" [missing_array]="numOfMissingArray" [missing_incidator]="missingIndicator" (checkEvent)="changeColomnVisibility($event)" (labelEvent)="onTargetColumnSelect($event)"></app-labels>
+                </div>
+            </div>
+            <div class="stats-view" [ngStyle]="{'display':statsViewDisplay}">
+                <app-stats #Stats></app-stats>
+                <br>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Training and evaluation</ng-template>
+        <div id="second" class="container-flex">
+            <app-hyperparameters [choosenInAndOutCols]="choosenInAndOutCols" [datasetId]="datasetId" [ngStyle]="{'display': trainingDisplay}"></app-hyperparameters>
+            <!-- Deo kada se klikne na dugme -->
+            <!-- <div class="options">
+            <input>
+        </div> -->
+        </div>
+    </mat-step>
+</mat-stepper>
+
+<div class="modal fade" #modal id="modifyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="staticBackdropLabel" style="margin-bottom:0px">Modifying dataset: <i>{{datasetName}}</i></h2>
+                <button type="button" class="btn-close" style="margin-right: 0.5rem;" *ngIf="modifyChangeButtons" data-bs-toggle="modal" data-bs-target="#secondModal" (click)="confirmationCancel()" aria-label="Close" id="modal-close"></button>
+                <button type="button" class="btn-close" style="margin-right: 0.5rem;" *ngIf="!modifyChangeButtons" data-bs-dismiss="modal" aria-label="Close" id="modal-close"></button>
+            </div>
+            <div class="modal-body" style="padding: 0.5rem; margin-top: 0.5rem" [formGroup]="formPagesModify">
+                <app-modify-dataset #modifyModal *ngIf="modalDisplay" [table_data]="dataTable.rowData" [header]="dataTable.headers" [currentPage]="currentPage" (changeEvent)="changeModifyButtons($event)"></app-modify-dataset>
+                <div class="justify-content-sm-end d-flex align-items-center me-1 my-2">
+                    Jump to page&nbsp;<input matInput type="number" formControlName="currentPageModify" [min]="1" [max]="maxPagesModiify" (ngModelChange)="changePageModify($event)" (keydown.enter)="changePageModify($event)">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" *ngIf="modifyChangeButtons" data-bs-toggle="modal" data-bs-target="#secondModal" (click)="confirmationCancel()">Cancel</button>
+                <button type="button" class="btn btn-secondary" *ngIf="!modifyChangeButtons" data-bs-dismiss="modal" (click)="updateCurrentPageFromModify()">Cancel</button>
+                <button type="button" class="btn btn-primary" *ngIf="modifyChangeButtons" data-bs-toggle="modal" data-bs-target="#secondModal" (click)="confirmationSave()">Apply changes</button>
+                <button type="button" class="btn btn-primary" disabled *ngIf="!modifyChangeButtons" data-bs-dismiss="modal">Apply changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="secondModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="staticBackdropLabel">Confirmation</h2>
+            </div>
+            <div class="modal-body" *ngIf="!confirmation">
+                Are you sure that you want to cancel changes? This proccess cannot be undone.
+            </div>
+            <div class="modal-body" *ngIf="confirmation">
+                Are you sure that you want to save changes? This proccess cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modifyModal">No</button>
+                <button type="button" *ngIf="!confirmation" class="btn btn-primary" data-bs-dismiss="modal" (click)="OnModalClose()">Yes</button>
+                <button type="button" class="btn btn-primary" *ngIf="confirmation" data-bs-dismiss="modal" (click)="OnModalSave()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

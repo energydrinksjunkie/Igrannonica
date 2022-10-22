@@ -1,0 +1,49 @@
+<div class="row" id="blok">
+    <div class="col-md-6 offset-md-3 mt-4">
+        <h3>Registration</h3>
+        <form #forma="ngForm" (ngSubmit)="onSubmit(forma)">
+            <div class="mb-3">
+                <label for="registerUsername">Username</label>
+                <input type="text" name="username" ngModel required pattern="([a-zA-Z]){4,}\w+" #username="ngModel" class="form-control" id="registerUsername" placeholder="At least 5 letters">
+            </div>
+            <div class="mb-3">
+                <label for="registerEmail">Email</label>
+                <input type="email" name="email" ngModel required pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" #email="ngModel" class="form-control" id="registerEmail" placeholder="Enter email" maxlength="320">
+
+            </div>
+            <div class="mb-3">
+                <label for="registerPassword">Password</label>
+                <input type="password" name="password" ngModel required pattern="([a-zA-Z0-9_\-]){4,}\w+" #password="ngModel" class="form-control" id="registerPassword" placeholder="At least 5 letters or numbers" (ngModelChange)="onPasswordConfirmChange(forma)">
+            </div>
+            <div class="mb-3">
+                <label for="registerConfirmPassword">Confirm password</label>
+                <input type="password" name="registerConfirmPassword" ngModel required pattern="([a-zA-Z0-9]){4,}\w+" #confirmpassword="ngModel" class="form-control" id="registerConfirmPassword" placeholder="Enter the password above" (ngModelChange)="onPasswordChange(forma)"
+                    #passwordInput>
+            </div>
+
+            <button type="submit" [disabled]="forma.invalid" class="btn btn-primary">Register </button>
+            <div id="circle" [ngStyle]="{'display': loaderDisplay}">
+                <div class="loader">
+                    <div class="loader">
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-md-6 offset-md-3 mt-4" id="serverError" [ngStyle]="{'display': serverErrorDisplay}">
+            <p class="alert alert-danger text-center" role="alert">Something went wrong. Try again later</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-md-6 offset-md-3 mt-4" id="uspesnaRegistracijaMessage" [ngStyle]="{'display': registerSuccessDisplay}">
+    <p class="alert alert-success text-center" role="alert">You're almost done! Check your email for a confirmation link.</p>
+</div>
+<div class="col-md-6 offset-md-3 mt-4" id="usernameAlreadyExists" [ngStyle]="{'display': usernameExistsDisplay}">
+    <p class="alert alert-danger text-center" role="alert">Username already exists</p>
+</div>
+<div class="col-md-6 offset-md-3 mt-4" id="emailAlreadyExists" [ngStyle]="{'display': emailExistsDisplay}">
+    <p class="alert alert-danger text-center" role="alert">Email already exists</p>
+</div>

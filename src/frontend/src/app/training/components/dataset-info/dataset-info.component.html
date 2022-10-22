@@ -1,0 +1,14 @@
+<div class="info-container">
+    <h3 class="mb-0">Insert dataset info</h3>
+    <hr class="mt-0">
+    <form>
+        <div class="form-group">
+            <label for="dataset-title">Title</label>
+            <input type="text" class="form-control mb-3" placeholder="Enter dataset title" id="dataset-title" (change)="changeName($event.target)" [value]="fileName">
+        </div>
+        <div class="form-group">
+            <label for="dataset-desc">Description</label>
+            <textarea class="form-control mb-3" placeholder="Enter description" id="dataset-desc" (change)="changeDescription($event.target)"></textarea>
+        </div>
+    </form>
+</div>

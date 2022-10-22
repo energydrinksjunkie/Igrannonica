@@ -1,0 +1,10 @@
+<div style="text-align: center;">
+  <button type="button" class="btn btn-danger" 
+  id="deleteButton" (click)="onRemoveSelected()">Delete selected</button>&nbsp;
+  <button type="button" class="btn btn-secondary" 
+  id="undoButton" (click)="onUndo()" [disabled]="undoDisabled">Undo</button>&nbsp;
+</div>
+<span style="color: red;text-align: center;">{{errorMessage}}</span> 
+<br>
+<app-show-table #modifyTable 
+(undoEvent)="enableUndo($event)" (errorEvent)="showErrorMessage($event)" [currentPage]="currentPage"></app-show-table>

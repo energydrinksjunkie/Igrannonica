@@ -1,0 +1,103 @@
+<div class="card" style="height: 27rem;" *ngIf = "columns">
+  <div class="row card-header ms-0 me-0">
+    <h2 class="mb-0 ps-0 col-sm-6">Choose inputs</h2>
+  </div>
+  <div class="row card-header ms-0 me-0">
+    <div class="btn col-sm-6 text-center selectAllButton" (click)="selectAll()">
+      <div class="text-nowrap" >
+        Select All 
+      </div>
+    </div>
+    <div class="btn col-sm-6 text-center unselectAllButton" (click)="unselectAll()">
+      <div class="text-nowrap">
+        Deselect All
+      </div>
+    </div>
+  </div>
+  <div class="card-body" style="overflow-y: auto;padding:0.5rem" tabindex="0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="align-middle">
+          <tr>
+            <th scope="col">Include</th>
+            <th scope="col">Column</th>
+            <th scope="col">Encoding</th>
+            <th scope="col" *ngIf="showMissingColumn">Fill Missing Values With</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let column of columns; index as i" style="overflow-y:auto;">
+          <tr [ngStyle]="(targetColumn && targetColumn.key == column.key) && {'background-color': '#9eaebc4f'}">
+            <td>
+              <input class="form-check-input" type="checkbox" [value]="column.key" 
+              [checked]="checkboxCheckedArray[i]" 
+              [disabled]="targetColumn != null && targetColumn.key == i" id="inputCheckbox{{column.key}}" 
+              (change)= "onCheckChange($event)"
+              *ngIf="!targetColumn || ( targetColumn && targetColumn.key != column.key )">
+              <span style="font-size: small;" *ngIf="targetColumn && targetColumn.key == column.key">Output</span>
+            </td>
+            <td>
+              <label class="form-check-label custom-label" for="inputCheckbox{{column.key}}" [ngStyle]="{'cursor':targetColumn != null && targetColumn.key == i? 'default' : 'pointer'}">
+                {{column.name}}
+                <div>
+                  <span style="font-size: x-small;font-style: italic;">{{ typeArray[i] }}</span>
+                </div>
+              </label>
+            </td>
+            <td class="encoding" [ngStyle]="{'width': !showMissingColumn? '40%' : 'auto'}"> <!-- NAPOMENA: redosled opcija mora da se poklapa sa redosledom u modelima -->
+              <select [hidden]="targetColumn && targetColumn.key == columns[i].key" class="form-select" #encodingSelection aria-label="Default select example" 
+              [ngStyle]="{'width': !showMissingColumn? '100%' : '110%'}"
+              (change)="onEncodingChange(i,encodingSelection.value)" [disabled]="encodingDisabledArray[i]">
+                <option value="None" [hidden]="!encodingDisabledArray[i]" [selected]="encodingDisabledArray[i]">Not Applicable</option><!-- TODO izmestiti listu encoding-a -->
+                <option value="OneHot" [selected]="!encodingDisabledArray[i]">One Hot</option>
+                <option value="Ordinal">Ordinal</option> 
+                <option  value="Binary">Binary</option> 
+              </select>
+            </td>
+            <td class="missing-handler" *ngIf="showMissingColumn">
+              <div *ngIf="!missing_array[column.name]">
+                <span style="color:gray">No missing values</span>
+              </div>
+              <div id="constant-div" class="row bg-primary p-1" style="--bs-gutter-x: 0rem;" *ngIf="(checkboxCheckedArray[i] || targetColumnId== i) && !constantsDisabledArray[i]">
+                <span style="margin-top: 2.5px;" class="col-10 trim-content">Constant - <b>{{constantsChoosen.get(i)}}</b></span>
+                <span class="col-2"><mat-icon id="close-icon" (click)="deleteConstant(i)">close</mat-icon></span>
+              </div>
+              <select class="form-select" [(ngModel)]="selectedMissingHandler[i]"  #missingSelection aria-label="Default select example"
+              [hidden]="missing_array[column.name] == 0"
+              [disabled]="!checkboxCheckedArray[i] && targetColumnId != column.key" 
+              *ngIf="typeArray[i] == 'Categorical' && constantsDisabledArray[i]" 
+              (change)="onMissingChange(i, missingSelection.value)">
+                <option *ngIf="!checkboxCheckedArray[i] && targetColumnId != column.key" [selected]="!checkboxCheckedArray[i]">Disabled</option>
+                <option *ngFor="let handler of missing_categorical" [value]="handler.codename">
+                  {{handler.name}}
+                </option>
+              </select>
+              <select class="form-select" [(ngModel)]="selectedMissingHandler[i]" aria-label="Default select example" #missingNumericalSelection 
+              [hidden]="missing_array[column.name] == 0"
+              [disabled]="!checkboxCheckedArray[i] && targetColumnId != column.key" 
+              *ngIf="typeArray[i] == 'Numerical' && constantsDisabledArray[i]" 
+              (change)="onMissingChange(i, missingNumericalSelection.value)">
+                <option *ngIf="!checkboxCheckedArray[i] && targetColumnId != column.key" [selected]="!checkboxCheckedArray[i]">Disabled</option>
+                <option *ngFor="let handler of missing_numerical" [value]="handler.codename">
+                  {{handler.name}}
+                </option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="height: 30%;" *ngIf = "columns">
+  <h2 class="card-header mb-0">Choose output</h2>
+  <div class="card-body">
+    <select [(ngModel)]="targetColumn" #selectLabel class="form-select" aria-label="Odabir izlaza" 
+    (change)="onLabelColSelect()"><!-- TODO povecati font za aria-label -->
+      <option [ngValue]="null" disabled>--</option>
+      <option class="word-wrap" *ngFor="let column of columns;" [ngValue]="column">
+        {{column.name}}</option> <!-- TODO postaviti automatski tip -->
+    </select>
+  </div>
+</div>
+

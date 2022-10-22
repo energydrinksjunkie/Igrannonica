@@ -1,0 +1,29 @@
+<div class="row" id="blok">
+    <div class="col-md-6 offset-md-3 mt-4">
+        <h3>Login</h3>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="mb-3">
+                <label for="loginUsernameOrEmail" class="form-label">Username or Email</label>
+                <input type="text" name="usernameOrEmail" ngModel required #usernameOrEmail="ngModel" class="form-control" id="usernameOrEmail" placeholder="Enter username or email">
+            </div>
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input type="password" name="password" ngModel required #password="ngModel" class="form-control" id="loginPassword" placeholder="Enter password">
+            </div>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Login</button>
+            <div id="circle" [ngStyle]="{'display': loaderDisplay}">
+                <div class="loader">
+                    <div class="loader">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-md-6 offset-md-3 mt-4" id="neUspesanLogin" [ngStyle]="{'display': errorDisplay}">
+            <p class="alert alert-danger text-center" role="alert">{{errorMsg}}</p>
+        </div>
+    </div>
+
+</div>
+<div class="col-md-6 offset-md-3 mt-4" id="uspesanLogin" [ngStyle]="{'display': loginSuccessDisplay}">
+    <p class="alert alert-success text-center" role="alert">Successful login. You will be redirected automatically...</p>
+</div>

@@ -1,0 +1,37 @@
+<div class="stats-container">
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" [(selectedIndex)]="stats_tab_index" (selectedIndexChange)="setIndex($event)">
+        <mat-tab label="General">
+            <div class="tab-container">
+                <h3>Basic Information</h3>
+                <app-show-table #basicInfo></app-show-table>
+                <h3 class="missing-heading">Missing Values for Each Column</h3>
+                <app-show-table #missingValues></app-show-table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Numerical Data">
+            <div class="tab-container">
+                <h3>Statistical Indicators for Numerical Data</h3>
+                <app-show-table #numIndicators></app-show-table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Categorical Data">
+            <div  class="tab-container">
+                <h3>Statistical Indicators for Categorical Data</h3>
+                <app-show-table #catIndicators></app-show-table>
+            </div>
+        </mat-tab>
+        <mat-tab label="Correlation Matrix">
+            <div class="tab-container">
+                <p style="color:gray; margin-top: 15px; margin-bottom: -10px;">Click to see closer</p>
+                <img class="corr-img" [src]="corrMatrixImgSource" (click)="openImage()" style="border-color: white;border-width: 2px;border-style: solid;border-radius: 25px;">
+                <div class="preview-img" *ngIf="showImage" (click)="closeImage()">
+                    <button class="close-btn" (click)="closeImage()"><mat-icon>close</mat-icon></button>
+                    <div class="corr-full-img" *ngIf="previewImage">
+                        <img [src]="corrMatrixImgSource">
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+

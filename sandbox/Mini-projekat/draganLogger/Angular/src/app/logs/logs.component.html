@@ -1,0 +1,20 @@
+Naziv: <input type="text" [(ngModel)]="naziv"/><br><br>
+Opis: <input type="text" [(ngModel)]="opis"/><br><br>
+<button (click)="addClick()">Dodaj</button><br><br>
+<table>
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Datum i vreme</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of LogsList">
+            <td>{{dataItem.naziv}}</td>
+            <td>{{dataItem.opis}}</td>
+            <td>{{dataItem.date}}</td>
+            <td><button (click)="deleteClick(dataItem)">Izbrisi</button></td>
+        </tr>
+    </tbody>
+</table>

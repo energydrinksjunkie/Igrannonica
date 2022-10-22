@@ -1,0 +1,126 @@
+<h2 style="text-align: center;">Choose dataset</h2>
+<div class="dataset-container">
+    <mat-tab-group class=" pb-3" mat-align-tabs="center" animationDuration="0ms" [(selectedIndex)]="tab_index" (selectedIndexChange)="setIndex($event)">
+        <mat-tab label="Predefined dataset">
+            <ng-template matTabContent>
+                <div class="container p-3">
+                    <div class="row justify-content-center" style="column-gap: 30px;">
+                        <div class="col-sm-1 file-icon p-1 flex-wrap" (click)="publicLinkClick(diamondsURL)">
+                            <img class="img-icon" src="assets/resources/file-icon.svg" alt="file">
+                            <br>
+                            <p class="mb-0 text-center flex-wrap csv-text">diamonds.csv</p>
+                        </div>
+                        <div class="col-sm-1 file-icon p-1 flex-wrap" (click)="publicLinkClick(titanicURL)">
+                            <img class="img-icon" src="assets/resources/file-icon.svg" alt="file">
+                            <br>
+                            <p class="mb-0 text-center flex-wrap csv-text">titanic.csv</p>
+                        </div>
+                        <div class="col-sm-1 file-icon p-1 flex-wrap" (click)="publicLinkClick(weightsURL)">
+                            <img class="img-icon" src="assets/resources/file-icon.svg" alt="file">
+                            <br>
+                            <p class="mb-0 text-center flex-wrap csv-text">weights.csv</p>
+                        </div>
+                        <div class="col-sm-1 file-icon p-1 flex-wrap" (click)="publicLinkClick(covidURL)">
+                            <img class="img-icon" src="assets/resources/file-icon.svg" alt="file">
+                            <br>
+                            <p class="mb-0 text-center flex-wrap csv-text">covid19.csv</p>
+                        </div>
+                        <div class="col-sm-1 file-icon p-1 flex-wrap" (click)="publicLinkClick(browserURL)">
+                            <img class="img-icon" src="assets/resources/file-icon.svg" alt="file">
+                            <br>
+                            <p class="mb-0 text-center flex-wrap csv-text">browsers.csv</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Link">
+            <ng-template matTabContent>
+                <div class="mx-auto" style="width: 80%;">
+                    <h3 class="mb-0" style="color: #212529">Dataset URL</h3>
+                    <hr class="mt-0">
+                    <input type="text" class="form-control mb-3" [(ngModel)]="datasetURL" name="dataset-url" id="dataset-url" placeholder="Enter dataset URL" (ngModelChange)="onLinkChange()">
+                    <div id="error-message" [hidden]="!badLinkErrorDisplay" class="alert alert-danger" role="alert">
+                        {{errorMessage}}
+                    </div>
+                    <br><br>
+                    <app-dataset-info
+                    (changeNameEvent)="updateDatasetLinkName($event)" 
+                    (changeDescriptionEvent)="updateDatasetLinkDescription($event)"
+                    [filenameFromParent]="linkName">
+                    </app-dataset-info>
+                </div>
+                <div class="nextButton">
+                    <button id="next" class="btn btn-primary" [disabled]="datasetURL=='' && linkName == ''" (click)="linkClick()"><mat-icon>navigate_next</mat-icon></button>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Upload">
+            <ng-template matTabContent>
+                <div class="container" id="div-upload">
+                    <div class="row justify-content-center">
+                        <div class="col-md-5 dropzone" *ngIf="showDragAndDrop" appDragAndDrop (fileDropped)="onFileDropped($event)">
+                            <input type="file" accept=".csv" class="file-input" #fileDrop id="file-drop" (change)="fileHandler($event)">
+                            <img src="assets/resources/icon-upload.svg" width="10%">
+                            <br>
+                            <span>Drag and drop file here</span>
+                            <br>
+                            <span>or</span>
+                            <br>
+                            <span style="color:dodgerblue">click to upload</span>
+                        </div>
+                        <div class="col-md-5 files-list my-auto" *ngIf="!showDragAndDrop">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-4 file-icon">
+                                        <img class="img-icon mx-auto my-2" src="assets/resources/file-icon.svg" alt="file">
+                                    </div>
+                                    <div class="col-lg-6 d-flex flex-column justify-content-center px-3" id="info">
+                                        <p class="file-name">{{fileName}}</p>
+                                        <p class="file-size" style="color: #38424c;">{{fileSize}}</p>
+                                    </div>
+                                    <div class="col-lg-2 my-auto mx-0">
+                                        <button type="button" class="btn btn-primary" id="delete-button" (click)="removeFile()"><mat-icon>delete</mat-icon></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <app-dataset-info (changeNameEvent)="updateDatasetName($event)" 
+                            (changeDescriptionEvent)="updateDatasetDescription($event)" 
+                            [filenameFromParent]="fileName"></app-dataset-info>
+                        </div>
+                    </div>
+                </div>
+                <div class="nextButton">
+                    <button id="next" class="btn btn-primary" [disabled]="file==null && fileSize == null" (click)="uploadClick()" (keyup.enter)="uploadClick()"><mat-icon>navigate_next</mat-icon></button>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="My dataset">
+            <ng-template matTabContent>
+                <div class="dropzone">
+                    <div *ngIf="datasetsList.length == 0">
+                        <!-- TODO -->
+                        You don't have any dataset.
+                    </div>
+                    <div *ngIf="myDatasets.length > 0">
+                        <div class="dataset row" style="border-bottom: solid darkslategray 1px;" *ngFor="let dataset of datasetsList">
+                            <div class="col-md-11 col-sm-11">
+                                <div class="row">
+                                    <h2 class="align-self-start d-flex">{{dataset.name}}</h2>
+                                </div>
+                                <div class="row">
+                                    <p class="align-self-start d-flex">{{dataset.description}}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-1 col-sm-11 align-self-center">
+                                <button class="btn btn-outline-success" (click)="myDatasetClick(dataset)">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

@@ -1,0 +1,100 @@
+<div class="container content z-depth-1">
+  <div class="row">
+    <div class="col s12 text-center mb-3 font-italic">
+      <h1>Admin panel</h1>
+    </div>
+    <div class="list-container row">
+      <div class="row">
+        <div class="col">
+          <h4>Users</h4>
+        </div>
+        <div class="col">
+          <h4>Admins</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l4" style="overflow-y: scroll; max-height: 30em;">
+          <div *ngFor="let user of users;  let i = index" [attr.data-index]="i">
+            <div class="user-list list insert-docs"  *ngIf="user['role'] != 'Admin'">
+              <div class="list-item">
+                <div class="primary-data trim-overflow">
+                  <div class="name">{{user['username']}}</div>
+                  <div class="email">{{user['email']}}</div>
+                  <div style="color: #FF6257" *ngIf="!user['verifiedEmail']">Unverified email address</div>
+                </div>
+                <div class="secondary-data">
+                  <div class="action-icon red-text" data-bs-toggle="modal"  data-bs-target="#buttonDeleteModal" (click)="selectUser(user['id'])"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m6 l4" style="overflow-y: scroll; max-height: 30em;">
+          <div *ngFor="let user of users">
+            <div class="user-list list insert-docs"  *ngIf="user['role'] == 'Admin'">
+              <div class="list-item">
+                <div class="primary-data trim-overflow">
+                  <div class="name">{{user['username']}}</div>
+                  <div class="email">{{user['email']}}</div>
+                  <div style="color: #FF6257" *ngIf="!user['verifiedEmail']">Unverified email address</div>
+                </div>
+                <div class="secondary-data" *ngIf="!user['verifiedEmail']">
+                  <div class="action-icon red-text" data-bs-toggle="modal"  data-bs-target="#buttonDeleteModal" (click)="selectUser(user['id'])"><i class="material-icons">delete</i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col s12 m-3 l4 text-center">
+    <button type="button" class="btn red-text btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#emailDeleteModal">Delete by email</button>
+  </div>
+
+  
+  <div class="mx-auto" id="deleteError" [ngStyle]="{'display': errorDisplay}">
+    <p class="alert alert-danger text-center" role="alert">Error</p>
+  </div>
+</div>
+<div class="modal fade" id="emailDeleteModal" role="dialog" aria-labelledby="emailDeleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title m-0" id="emailDeleteModal">Delete by email</h3>
+        <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email</label>
+            <input type="email" class="form-control" id="email" #email placeholder="user@gmail.com">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn red-text" data-bs-dismiss="modal" (click)="deleteUserByEmail()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="buttonDeleteModal" tabindex="-1" aria-labelledby="buttonDeleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title m-0" id="buttonDeleteModal">Delete</h3>
+        <button type="button" class="btn-close me-1" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure that you want to delete this user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn red-text" data-bs-dismiss="modal" (click)="deleteUser(userSelectedID)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

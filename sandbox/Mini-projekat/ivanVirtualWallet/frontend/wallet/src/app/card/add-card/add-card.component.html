@@ -1,0 +1,29 @@
+<div class="container">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <label for="name">
+        Ime Korisnika
+      </label>
+      <input id="holderName" class="form-control form-control-lg" type="text" formControlName="holderName">
+    </div>
+
+    <div>
+      <label for="address">
+        Prezime korisnka
+      </label>
+      <input class="form-control form-control-lg" id="lastname" type="text" formControlName="lastName">
+    </div>
+
+    <div>
+      <label for="address">
+        Broj Kartice
+      </label>
+      <input class="form-control form-control-lg" id="cardNumber" type="text" formControlName="cardNumber">
+    </div>
+
+    <button h class="btn-primary btn" type="submit">Dodaj karticu</button>
+
+  </form>
+</div>
+

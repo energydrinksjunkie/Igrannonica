@@ -1,0 +1,25 @@
+<form>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label> &nbsp;
+        <input type="text" class="form-control" [(ngModel)]="title" name="title">
+    </div>
+    <div class="mb-3">
+        <label for="statusId" class="form-label">Current status</label> &nbsp;
+        <select id="statusId" name="currentStatusId" [(ngModel)]="currentStatusId">
+            <option *ngFor="let item of statusList$|async" 
+                [value]="item.id">{{item.statusOption}}</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="desc" class="form-label">Description</label> &nbsp;
+        <input type="text" class="form-control" [(ngModel)]="description" name="desc">
+    </div>
+    <input type="hidden" [(ngModel)]="creationDate" name="creationDate">
+
+    <button class="btn btn-primary" (click)="addTask()" *ngIf="task.id==0">
+        Add
+    </button>
+    <button class="btn btn-primary" (click)="updateTask()" *ngIf="task.id!=0">
+        Update
+    </button>
+</form>

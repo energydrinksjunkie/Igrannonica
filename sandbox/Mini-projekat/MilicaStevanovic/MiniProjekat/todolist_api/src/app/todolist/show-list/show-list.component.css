@@ -1,0 +1,20 @@
+#add-success-alert, #update-success-alert, #delete-success-alert,#user-success-alert
+{
+    display: none;
+}
+
+#add-success-alert, #update-success-alert, #delete-success-alert,#user-success-alert
+{
+    animation-name: fade;
+    animation-duration: 4s;
+}
+@-webkit-keyframes fade {
+    0% {opacity: 0;}
+    50%{opacity: 1;}
+    100%{opacity: 0;}
+}
+@keyframes fade {
+    0% {opacity: 0;}
+    50%{opacity: 1;}
+    100%{opacity: 0;}
+}

@@ -1,0 +1,36 @@
+<div id="main" class="container justify-content-center">
+    <div class="row">
+        <div id="filteri" class="col-sm-12 col-lg-3">
+            <!-- filteri -->
+            <h4 class="h4">Filtriraj po</h4>
+
+        </div>
+        <!-- kraj filtera -->
+        <div id="datasets" class="col-sm-12 col-md-9 col-lg-9 p-3">
+            <div class="row m-2">
+                <div class="col-md-10 col-sm-10 col-lg-10">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                </div>
+                <div class=" col-lg-2 col-md-2 col-sm-2">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </div>
+            </div>
+
+            <div class="dataset row d-flex" *ngFor="let publicDataset of publicDatasets">
+                <div class="col-md-11 col-sm-11">
+                    <a href="#">{{publicDataset.name}}</a>
+                    <p>{{publicDataset.description}}</p>
+                    <div class="tag">Tag 1</div>
+                    <div class="tag">Tag 2</div>
+                    <div class="tag">Tag 3</div>
+                    <div class="tag">Tag 4</div>
+                </div>
+                <div class="col-md-1 col-sm-11 align-self-end">
+                    <button class="btn btn-outline-success" type="submit">View</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

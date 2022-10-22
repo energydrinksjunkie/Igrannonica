@@ -1,0 +1,25 @@
+
+<div class="grid-wrapper mx-1" *ngIf = "data">
+  
+    <ag-grid-angular
+        [style]="tableStyle"
+        [class]="tableClass"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [pagination]="paginationEnabled"
+        [paginationPageSize]="paginationPageSize"
+        [rowSelection]="rowSelection"
+        [animateRows]="paginationEnabled"
+        [suppressColumnMoveAnimation] = "moveAnimationEnabled"
+        [suppressDragLeaveHidesColumns]="suppressDragLeaveHidesColumnsEnabled"
+        (columnVisible)="onColumnVisible($event)"
+        (cellValueChanged)="onCellValueChanged($event)"
+        [undoRedoCellEditing]="undoRedoCellEditing"
+        [undoRedoCellEditingLimit]="undoRedoCellEditingLimit"
+        [enableCellChangeFlash]="enableCellChangeFlash"
+        (gridReady)="onGridReady($event)"
+        >
+    </ag-grid-angular>
+</div>
+
+

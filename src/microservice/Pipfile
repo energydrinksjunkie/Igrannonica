@@ -1,0 +1,32 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+pandas = "*"
+chardet = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+fastapi = "*"
+pydantic = "*"
+typing = "*"
+python-multipart = "*"
+websockets = "*"
+asyncio = "*"
+urllib3 = "==1.25.11"
+tensorflow = "*"
+matplotlib = "*"
+sklearn = "*"
+seaborn = "*"
+category-encoders = "*"
+
+[dev-packages]
+waitress = "*"
+
+[scripts]
+server = "gunicorn ann_server:app --workers 3 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:10082"
+dev_server = "python ann_server.py dev"
+
+[requires]
+python_version = "*"

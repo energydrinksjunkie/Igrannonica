@@ -1,0 +1,41 @@
+<div cdkDropList cdkDropListOrientation="horizontal" class="example-list p-2" (cdkDropListDropped)="drop($event)">
+    <div style="width: 130px;min-width: 130px;" class="card bg-light mx-1" *ngFor="let layer of layers; let i=index" cdkDrag>
+        <div cdkDragHandle class="card-header d-flex justify-content-end">
+            <button type=" button " class="btn-close " aria-label="Close " (click)="removeLayer(i)">
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <h6 class="mb-0">Number of neurons</h6>
+                <input type="number" name="units" class="form-control" [value]="layer.units" [min]="1">
+            </div>
+            <div class="row justify-content-center">
+                <mat-form-field style="width: 130px;min-width: 130px;height: 80%;margin: 0px;font-size: 10px;padding: 5px;" class="mat-form" appearance="fill">
+                    <mat-label><b>Activation function</b></mat-label>
+                    <mat-select [(value)]="layers[i].activation_function" name="activationFunctionControl">
+                        <mat-option *ngFor="let item of activationFunctions" [value]="item.codename">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="activationFunctionControl.hasError('required')">Please choose a activation function</mat-error> -->
+                </mat-form-field>
+            </div>
+            <!-- [formControl]="activationFunctionControl" -->
+
+            <div class="row justify-content-center" style="position: relative;top: -15px;margin-bottom: -30px;">
+                <mat-form-field style="width: 130px;min-width: 130px;height: 80%;margin: 0px;font-size: 10px;padding: 5px;" class="mat-form" appearance="fill">
+                    <mat-label><b>Weight initializer</b></mat-label>
+                    <mat-select [(value)]="layers[i].weight_initializer" name="weightInitializatorControl">
+                        <mat-option *ngFor="let item of weightInitializers" [value]="item.codename">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="activationFunctionControl.hasError('required')">Please choose a activation function</mat-error> -->
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-circle btn-sm ml-1" type="button " (click)="addLayer() "><mat-icon>add</mat-icon></button>
+
+</div>

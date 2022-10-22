@@ -1,0 +1,103 @@
+h3
+{
+    margin-top: 2%;
+    text-align: center;
+    color:#38424c;
+    font-weight: 500;
+}
+
+.dataset-container{
+    width: 80%;
+    background-color: #e4eae2;
+    margin:auto;
+    border-radius: 10px;
+}
+#div-upload
+{
+    padding-top: 1rem;
+    width: 85%;
+}
+.dropzone{
+    padding: 2rem;
+    border:dashed 1.5px #979797;
+    margin:4px auto;
+}
+.dropzone{
+    position: relative;
+    margin-bottom: 10px;
+    text-align: center;
+    
+}
+.files-list{
+    padding: 2rem;
+    border:solid 1.5px #979797;
+    margin:4px auto;
+    border-radius: 10px;
+}
+
+.file-icon{
+    border-radius: 1rem;
+    background-color:white;
+}
+.row{
+    hyphens: auto;
+    word-wrap: break-word;
+}
+.file-name{
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#delete-button{
+    color:white;
+    background-color: #db202f;
+    border-radius: 0.5rem;
+}
+.file-input{
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+.link-group{
+    text-align: center;
+}
+::ng-deep .mat-tab-label .mat-tab-label-content {
+    font-size: large;
+}
+
+/* responsive
+
+@media (max-width: 600px) {
+    .files-list {
+        width: 80%;
+    }
+    #file-button{
+        width: 50px;
+        height: 14px;
+    }
+}*/
+.mat-icon{
+    display: flex;
+}
+.nextButton{
+    text-align: end;
+    text-align: end;
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 10px;
+}
+.col-sm-1{
+    background: rgba(255, 255, 255, 0.7)
+}
+.col-sm-1:hover{
+    border: 2px dotted #0d6efd;
+}
+.csv-text{
+    font-size: 0.8vw;
+}
+  

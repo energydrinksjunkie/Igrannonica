@@ -1,0 +1,123 @@
+  .list {
+    margin: 4px 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+  .list .list-item {
+    padding: 0.75em 1.25em;
+    display: flex;
+  }
+  .list .list-item .primary-data {
+    flex-grow: 1;
+  }
+  .list .list-item .secondary-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .list .list-item .action-icon.red-text {
+    cursor: pointer;
+    color: #F44336 !important
+  }
+  .list .list-item .action-icon.grey-text {
+    cursor: pointer;
+    color: gray !important
+  }
+  .list .list-item .action-icon:not(:last-child) {
+    margin-right: 4px;
+  }
+  .list .list-item .action-icon.circle {
+    padding: 6px;
+    text-align: center;
+  }
+  .list .list-item .action-icon.circle.icon-stack {
+    width: 39px;
+    height: 39px;
+  }
+  .list .list-item .action-icon.circle.icon-stack .material-icons {
+    left: 7px;
+    top: 8px;
+  }
+  .list .list-item .name {
+    font-size: 1.6em;
+    margin-bottom: 4px;
+  }
+  .list .list-item:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+  }
+  .icon-stack {
+    position: relative;
+    height: 27px;
+    width: 24px;
+  }
+  .icon-stack .material-icons {
+    position: absolute;
+  }
+  .container .row .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .btn {
+      color: white;
+      background-color: #F44336;
+  }
+  @media (max-width: 600px) {
+    .container.content {
+      box-shadow: 10px ;
+      margin: 3em auto !important;
+      padding: 0;
+      max-width: 95%;
+    }
+  }
+  .doc h2,.doc h3,.doc h4 {
+    padding-bottom: 3px;
+  }
+  .normal-text, nav.normal-text * {
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
+  /* body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  p {
+    margin: 8px 0 16px 0;
+    font-size: 1.2rem;
+    line-height: 2rem;
+  } */
+  
+  /* ceo div */
+  .container.content {
+    flex: 1 0 auto;
+    padding: 16px;
+    margin: 64px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #212529;
+    box-shadow: 3px;
+  }
+  .content-yield {
+    height: 100%;
+  }
+  @media only screen and (max-width: 600px) {
+    .trim-overflow {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

@@ -1,0 +1,32 @@
+<form>
+    <div class="mb-3" *ngIf="task!=null">
+        <label for="userId" class="form-label">Ime korisnika</label>
+        <input type="text" class="form-control" name="userId" [(ngModel)]="this.user"
+        *ngIf="task.id!=0" disabled>
+        <select class="form-control" name="userId" id="userId" [(ngModel)]="userId" *ngIf="task.id==0">
+            <option *ngFor="let user of usersList$|async" [value]="user.id">{{user.name}}</option>
+        </select>
+    </div>
+    <div class="mb-3" *ngIf="task!=null">
+        <label for="comment" class="form-label">Zadatak</label>
+        <input type="text" class="form-control" name="comment" [(ngModel)]="comment">
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="task!=null">
+    <button (click)="addTask()" *ngIf="task.id==0" class="btn btn-primary">
+        Dodaj
+    </button>
+    <button (click)="updateTask()" *ngIf="task.id!=0" class="btn btn-primary">
+        Izmeni
+    </button>
+    </div>
+
+    <div class="mb-3" *ngIf="task==null">
+        <label for="userName" class="form-label">Ime korisnika</label>
+        <input type="text" class="form-control" name="userName" [(ngModel)]="userName">
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="task==null">
+        <button (click)="addUser()" class="btn btn-primary">
+            Dodaj
+        </button>
+    </div>
+</form>

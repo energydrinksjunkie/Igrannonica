@@ -1,0 +1,123 @@
+#buttons,#mainTable,#labelCards,#mainContainer{
+    animation: fadein 3s;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+#circle {
+    position: relative;
+    top: 200px;
+    /* left: 30px; */
+    margin: 0 auto;
+    /* transform: translate(-50%,-50%); */
+	width: 150px;
+    height: 150px;	
+}
+.loader {
+    width: calc(100% - 0px);
+	height: calc(100% - 0px);
+	border: 8px solid transparent;
+	border-top: 8px solid #09f;
+	border-radius: 50%;
+	animation: rotate 3s linear infinite;
+}
+.navigation-buttons{
+    margin-top: 2%;
+}
+.header-container
+{
+    text-align: center;
+}
+@keyframes rotate {
+    100% {transform: rotate(360deg);}
+} 
+
+.oneNumber{
+    width: 250px;
+    padding: 5px;
+}
+h4{
+    text-align: center;
+}
+h6{
+    text-size-adjust: 80%;
+    text-align: center;
+}
+::ng-deep #slider span{
+    color: transparent;
+}
+::ng-deep .oneSelect {
+    width: 30%;
+}
+::ng-deep .select .mat-form-field {
+    display: block;
+    position: relative;
+    text-align: left;
+}
+#mainContainer{
+    margin-top:2rem;
+}
+.stats-view{
+    margin-top:2rem;
+}
+#error-message{
+    width: 75%;
+    margin:auto;
+}
+.mat-stepper-horizontal{
+    background-color: inherit;
+}
+::ng-deep .mat-horizontal-content-container{
+    padding: 0px !important;
+}
+::ng-deep .mat-horizontal-stepper-header-container{
+    height: 5rem;
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+    background-color: #09f;
+    height: 2.5rem;
+    width: 2.5rem;
+    font-size: 1.5rem;
+  }
+
+::ng-deep .mat-step-header .mat-step-label.mat-step-label-active{
+    font-weight: 500;
+}
+
+::ng-deep .mat-step-label-selected{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+
+::ng-deep .mat-step-header .mat-step-icon-selected{
+    /* animation: breathing 1s ease-out infinite normal; */
+    background-color: #00375c;
+}
+@keyframes breathing {
+    0% {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  
+    25% {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+  
+    60% {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  
+    100% {
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  }

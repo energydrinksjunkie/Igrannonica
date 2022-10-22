@@ -1,0 +1,32 @@
+.row{
+    margin: auto;
+    width: 900px;
+}
+#circle {
+    position: relative;
+    left: 25%;
+    top: -20px;
+    transform: translate(-50%,-50%);
+	width: 35px;
+    height: 35px;	
+}
+
+.loader {
+    width: calc(100% - 0px);
+	height: calc(100% - 0px);
+	border: 8px solid transparent;
+	border-top: 8px solid #09f;
+	border-radius: 50%;
+	animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+100% {transform: rotate(360deg);}
+} 
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }

@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-r"></i>Igrannonica</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto" id="dugmici">
+                <li class="nav-item">
+                    <a class="nav-link " [routerLink]="['/home']" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/training']" routerLinkActive="active">Training</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/datasets']" routerLinkActive="active">Datasets</a> TODO vratiti nakon implementacije potrebnih stranica
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/admin-panel']" routerLinkActive="active" *ngIf="isLoggedIn && isAdmin">Manage users</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right" *ngIf="displayLoginElement">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right" *ngIf="!displayLoginElement && user$">
+                <li class="nav-item">
+                    <a class="nav-link username disabled">
+                        <!--[routerLink]="['/api/my-profile']" routerLinkActive="active"-->
+                        {{(user$ | async)?.username}}
+                    </a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" (click)="doLogout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

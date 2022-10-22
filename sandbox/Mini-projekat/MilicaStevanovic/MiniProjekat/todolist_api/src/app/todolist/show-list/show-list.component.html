@@ -1,0 +1,93 @@
+  <!-- Button - add new user -->
+  <button type="button" class="btn btn-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+  (click)="modalAddUser()">
+    Dodaj korisnika
+</button>
+<!-- Button - add new task -->
+<button type="button" class="btn btn-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+(click)="modalAdd()">
+    Dodaj stavku
+  </button>
+
+
+<table class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Ime korisnika</th>
+        <th>Zadatak</th>
+        <th>Opcije</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of taskList$|async">
+            <td>
+                {{task.id}}
+            </td>
+            <td>
+                {{usersMap.get(task.userId)}} 
+            </td>
+            <td>
+                {{task.comment}}
+            </td>
+            <td>
+                <button class="btn btn-outline-primary me-2 mb-1" (click)="modalEdit(task)" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"> 
+                    Izmeni
+                </button>
+                <button class="btn btn-outline-danger me-2 mb-1" (click)="delete(task)">
+                    Izbrisi
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="alert alert-success" role="alert" id="add-success-alert">
+    Uspesno dodata stavka
+</div>
+
+<div class="alert alert-success" role="alert" id="update-success-alert">
+    Uspesno promenjena stavka
+</div>
+
+<div class="alert alert-success" role="alert" id="delete-success-alert">
+    Uspesno izbrisana stavka
+</div>
+<div class="alert alert-success" role="alert" id="user-success-alert">
+    Uspesno dodat korisnik
+</div>
+
+  <!-- Add new task -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{modalTittle}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalClose()"
+          id="add-edit-modal-close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-add-edit-list [task]="task" [user]="user" *ngIf="activateAddEditComponent"></app-add-edit-list> 
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add user -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <app-add-edit-list [task]="task" [user]="user" *ngIf="activateAddEditComponent"></app-add-edit-list>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>

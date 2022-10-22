@@ -1,0 +1,39 @@
+#datasets {
+    margin: 10px 0px;
+    background-color: whitesmoke;
+    border-radius: 15px;
+    border: 2px solid gray;
+    padding: 10px;
+}
+
+.dataset {
+    border-top: 1px solid gray;
+    padding: 5px;
+}
+
+.dataset a {
+    font-size: 20px;
+    color: darkslategrey;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dataset a:hover {
+    color: darkgray;
+}
+
+.dataset p {
+    color: gray;
+}
+
+.tag {
+    float: left;
+    background-color: lightgrey;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 3px;
+}
+
+#search {
+    padding: 10px;
+}

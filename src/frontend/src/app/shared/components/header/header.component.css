@@ -1,0 +1,13 @@
+li.nav-item > a {
+    cursor: pointer;
+
+    /* disable text selection */
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+li.nav-item > a.username {
+    color: #9a9c9e;
+}
